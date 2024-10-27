@@ -1,0 +1,34 @@
+.menucontainer {
+    height: 50px;
+    background-color: white;
+    position: fixed; /*อยู่กับที่*/
+    top: 0px;
+    left: 0px; /*ชิดซ้าย*/
+    right: 0px;
+    z-index: 30; /*ว่าอยู่ layer บนสุด*/
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgray;
+    
+    /*ของที่วางจะมีลักษณะ*/
+    display: flex;
+    flex-direction: row;
+}
+
+.logoimg{
+    height: 100%;
+    width: auto; 
+    /* ให้กว้างสัมพันธ์กับความสูง */
+
+    /* size: 100vh; */
+    
+}
+
+.itemcontainer{
+    width:120px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    color: grey;
+}
