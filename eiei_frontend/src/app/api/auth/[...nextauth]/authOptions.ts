@@ -47,5 +47,8 @@ export const authOptions:AuthOptions={
         //   // Set a default redirect if no callbackUrl is provided
         //   return baseUrl;
         // },
+    },
+    pages: {
+        signIn: "/signIn"
     }
 }
