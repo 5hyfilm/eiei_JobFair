@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import styles from './SignIn.module.css'; // Import the CSS module for styling
 
 const SignIn = () => {
   const [userEmail, setUserEmail] = useState('');
@@ -20,39 +21,44 @@ const SignIn = () => {
       password,
     });
 
-    // Log result for debugging purposes
-    console.log("Sign-in result:", result);
-
     if (result?.error) {
       setError(result.error || 'Invalid login credentials');
     } else {
-      router.push('/'); // Redirect to homepage after successful login
+      router.push('/');
     }
   };
 
   return (
-    <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <label htmlFor="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        value={userEmail}
-        onChange={(e) => setUserEmail(e.target.value)}
-        placeholder="Enter your email"
-        required
-      />
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter your password"
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className={styles.container}>
+      <div className={styles.tabs}>
+        <span className={styles.activeTab}>LOG IN</span>
+        <span className={styles.inactiveTab}>CREATE AN ACCOUNT</span>
+      </div>
+      <form onSubmit={handleLogin} className={styles.form}>
+        {error && <p className={styles.formError}>{error}</p>}
+        <label htmlFor="email" className={styles.formLabel}>Email</label>
+        <input
+          type="email"
+          id="email"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+          placeholder="Email Address"
+          required
+          className={styles.formInput}
+        />
+        <label htmlFor="password" className={styles.formLabel}>Password</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+          className={styles.formInput}
+        />
+        <button type="submit" className={styles.loginButton}>Login</button>
+      </form>
+    </div>
   );
 };
 
