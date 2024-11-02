@@ -37,7 +37,7 @@ export default function MyBookingCatalogue({Profile_id,token}:{Profile_id:string
             <div className={styles.card_layout}>
             {
                     bookingResponse.data.map((bookingItem:BookingItem)=>( //ตอนนี้ข้อมูลมาจาก API ตอนนี้เป็น child ต่อจาก flexs
-                        <Link href={`/mainpage/${bookingItem._id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8"> 
+                        <Link href={`/mainpage/${bookingItem._id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8" key={`${bookingItem._id}`} > 
                         <CompanyCard imgSrc={bookingItem.company.picture} companyName={bookingItem.company.name} id={bookingItem._id}
                         onRemoveReservation={(id:string)=>removeBooking(id)}/>
                          </Link>
