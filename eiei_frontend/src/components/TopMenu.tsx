@@ -1,12 +1,14 @@
+"use client"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./topmenu.module.css"
 import TopMenuItem from "./TopMenuItem"
 import { getServerSession } from "next-auth"
+import { useSession } from "next-auth/react"
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions"
 
-export default async function TopMenu(){
-    const session = await getServerSession(authOptions)
+export default function TopMenu(){
+    const { data: session } = useSession();
     return(
  
         // <div className="h-14 bg-white fixed top-0 left-0 right-0 z-30 flex items-center justify-end border-y-2 border-slate-300">
@@ -38,3 +40,6 @@ export default async function TopMenu(){
         </div>
     )
 }
+ 
+
+ 
