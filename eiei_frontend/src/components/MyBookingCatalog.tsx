@@ -7,8 +7,11 @@ import { useEffect, useState } from "react";
 import getBookings from "@/libs/getBookings";
 import deleteBooking from "@/libs/deleteBooking";
 
+type BookingResponse = {
+    data: BookingItem[];
+};
 export default function MyBookingCatalogue({Profile_id,token}:{Profile_id:string,token:string}){
-    const [bookingResponse,setBookingResponse]= useState(null)
+    const [bookingResponse, setBookingResponse] = useState<BookingResponse | null>(null);
     useEffect(()=>{
         const fetchData=async()=>{
             const booking = await getBookings(token)
@@ -17,11 +20,15 @@ export default function MyBookingCatalogue({Profile_id,token}:{Profile_id:string
         fetchData()
     },[])  
  
-    function removeBooking(Booking_ID:string){
-        console.log(Booking_ID)
-        deleteBooking(token,Booking_ID)
-        //Cannot re render for now
-        
+    async function removeBooking(Booking_ID: string) {
+        console.log(Booking_ID);
+        await deleteBooking(token, Booking_ID);
+
+        // Update the state to remove the deleted booking
+        setBookingResponse((prevState) => ({
+            ...prevState,
+            data: prevState?.data.filter((bookingItem) => bookingItem._id !== Booking_ID) || []
+        }));
     }
     if(bookingResponse==null) return <>NOW LOADING...</>
     return(
