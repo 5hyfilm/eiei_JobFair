@@ -1,7 +1,7 @@
 interface CompanyItem {
     _id: string,
     name: string,
-    bussiness: string,
+    business: string,
     address: string,
     province: string,
     postalcode: string,
@@ -10,6 +10,21 @@ interface CompanyItem {
     __v: number,
     id: string
   }
+
+  interface CompanyEditFormProps {
+    initialData: {
+        id: any;
+        name: string;
+        business: string;
+        address: string;
+        province: string;
+        postalcode: string;
+        tel: string;
+        picture: string;
+    };
+    token: string;
+    cid: string;
+}
   
   interface CompanyJson {
     success: boolean,

@@ -19,23 +19,7 @@ export default async function AdminCreatePage(){
         redirect("/mainpage")
     }
 
-    //     try{
-    //         await dbConnect() //to connect backend
-    //         const company=await Company.create(
-    //          {   "name":name,
-    //             "business":business,
-    //             "address":building,
-    //             "province":province,
-    //             "postalcode":postal,
-    //             "tel":tel,
-    //             "picture":pic
-    //         })
-    //         console.log("success")
-    //     }catch(error){
-    //         console.log(error)
-    //     }
-    //     revalidateTag("companies")
-    // }
+    
 
 
     return(

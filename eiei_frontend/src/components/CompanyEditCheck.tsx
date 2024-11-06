@@ -1,29 +1,29 @@
-"use client"; // This line indicates that this is a client component
+"use client"; 
 
 import { useState } from "react";
 import editCompany from "@/libs/pushCompany";
+import deleteCompany from "@/libs/deleteCompany";
+import { redirect } from "next/navigation";
 
-interface CompanyEditFormProps {
-    initialData: {
-        name: string;
-        business: string;
-        address: string;
-        province: string;
-        postalcode: string;
-        tel: string;
-        picture: string;
-    };
-    token: string;
-    cid: string;
-}
 
-const CompanyEditForm: React.FC<CompanyEditFormProps> = ({ initialData, token, cid }) => {
+export default function CompanyEditForm({ initialData, token, cid }:{initialData:CompanyItem,token:string,cid:string}){
     const [formData, setFormData] = useState(initialData);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
+
+    async function deleteCompanyID(){
+        try {
+            await deleteCompany(token,initialData.id);
+            alert("Company details updated successfully!");
+            redirect('/mainpage')
+        } catch (error) {
+            console.error("Failed to update company:", error);
+            alert("Error updating company details. Please try again.");
+        }
+    }
 
     const submitEditData = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -37,6 +37,7 @@ const CompanyEditForm: React.FC<CompanyEditFormProps> = ({ initialData, token, c
     };
 
     return (
+        <div>
         <form onSubmit={submitEditData}>
             <div className="grid grid-cols-3 flex gap-2 m-2">
                 <div className="col-span-1 font-bold text-center">Name</div>
@@ -141,8 +142,15 @@ const CompanyEditForm: React.FC<CompanyEditFormProps> = ({ initialData, token, c
                     Save
                 </button>
             </div>
+
         </form>
+        <div className="flex justify-center items-center my-5">
+                <button className="bg-green-700 hover:bg-green-950 text-white p-2 rounded-lg w-[25%]" onClick={()=>{deleteCompanyID()}}>
+                    Delete This Company
+                </button>
+            </div>
+        </div>
+        
     );
 };
 
-export default CompanyEditForm;
