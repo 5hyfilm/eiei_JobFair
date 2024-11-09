@@ -29,7 +29,7 @@ export default async function AdminCreatePage(){
             </div>
             <div className="border-2 border-gray-200 rounded-xl p-10">
                 
-        
+                <form action={addCompany}>
                     <div className="grid grid-cols-3 flex gap-2 m-2">
                         <div className="col-span-1 font-bold   text-center">
                             Name
@@ -93,7 +93,7 @@ export default async function AdminCreatePage(){
                             <button type="submit" className="bg-green-700 hover:bg-green-950 text-white p-2 rounded-lg w-[25%]">Save</button>
                     </div>
                     
-                    
+                    </form>   
             </div>
         </main>
     )
