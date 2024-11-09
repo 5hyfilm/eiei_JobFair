@@ -1,5 +1,5 @@
 export default async function getCompany(cid:string){
-    const companyResponse= await fetch(`http://localhost:5000/api/v1/companies/${cid}`)
+    const companyResponse= await fetch(`https://eiei-jobfair-backend.vercel.app/api/v1/companies/${cid}`)
     if(!companyResponse.ok){
         throw new Error("Failed to GET company")
     }

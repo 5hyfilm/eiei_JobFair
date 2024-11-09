@@ -7,7 +7,7 @@ export default async function editCompany(token:string,cid:string,companyData: {
     tel: string; 
     picture: string 
 }){
-    const response= await fetch(`http://localhost:5000/api/v1/companies/${cid}`,{
+    const response= await fetch(`https://eiei-jobfair-backend.vercel.app/api/v1/companies/${cid}`,{
         method:"PUT",
         headers:{
             'Content-Type': 'application/json',
