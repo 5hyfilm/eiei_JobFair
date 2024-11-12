@@ -1,9 +1,9 @@
-// app/signIn/page.tsx
+// app/signUp/page.tsx
 import { useState } from "react";
 import SignIn from "@/components/SignIn";
 import SignUp from "@/components/SignUp";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
@@ -22,4 +22,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
