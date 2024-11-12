@@ -11,6 +11,9 @@ export default async function Page(){
     const session = await getServerSession(authOptions) 
     if(!session || !session.user.token) return null
     const profile= await getUserProfile(session.user.token)
+    const role =profile.data.role
+    // sessionStorage.setItem('token',session.user.token)
+    // console.log(sessionStorage.getItem('token'))
     console.log(profile.data)
     console.log("OK")
 
@@ -23,7 +26,7 @@ export default async function Page(){
             </Suspense>
             
             { // may be move to topmenu
-                (profile.data.role=="admin")?
+                (role=="admin")?
                 <Link href={"/manage"}>
                     <button>Create</button>
                 </Link>

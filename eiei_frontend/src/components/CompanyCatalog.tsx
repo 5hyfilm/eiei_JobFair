@@ -16,7 +16,7 @@ export default async function CompanyCatalogue({companiesJson}:{companiesJson:Pr
                         // <CompanyCard imgSrc={companyitem.picture} companyName={companyitem.name} id={companyitem.id}/>
                         //  </Link>
                         // :
-                        <Link href={`/mainpage/${companyitem._id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8" key={companyitem.id}> 
+                        <Link href={`/mainpage/${companyitem.id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8" key={companyitem.id}> 
                         <CompanyCard imgSrc={companyitem.picture} companyName={companyitem.name} id={companyitem.id} />
                          </Link>
                     ))

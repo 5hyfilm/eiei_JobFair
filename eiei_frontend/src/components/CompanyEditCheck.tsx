@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 export default function CompanyEditForm({ initialData, token, cid }:{initialData:CompanyItem,token:string,cid:string}){
     const [formData, setFormData] = useState(initialData);
-
+    // const router=useRouter()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -18,7 +18,7 @@ export default function CompanyEditForm({ initialData, token, cid }:{initialData
         try {
             await deleteCompany(token,initialData.id);
             alert("Company details updated successfully!");
-            redirect('/mainpage')
+            location.href='/mainpage'
         } catch (error) {
             console.error("Failed to update company:", error);
             alert("Error updating company details. Please try again.");
