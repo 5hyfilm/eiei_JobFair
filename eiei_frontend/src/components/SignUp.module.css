@@ -1,0 +1,81 @@
+/* SignUp.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 3rem auto;
+    background-color: #ffffff;
+    padding: 3rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+  }
+  
+  .tabs {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .activeTab {
+    color: #4caf50;
+    border-bottom: 3px solid #4caf50;
+    padding-bottom: 0.5rem;
+  }
+  
+  .inactiveTab {
+    color: #666;
+    padding-bottom: 0.5rem;
+  }
+  
+  .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formError {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .formLabel {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .formInput {
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .formInput::placeholder {
+    color: #aaa;
+  }
+  
+  .signUpButton { /* Rename the button specifically for signup */
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signUpButton:hover {
+    background-color: #45a049;
+  }
+  
