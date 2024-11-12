@@ -1,3 +1,4 @@
+// app/signUp/SignUp.tsx
 "use client";
 
 import { useState } from 'react';
@@ -6,7 +7,7 @@ import styles from './SignUp.module.css';
 import userSignUp from '@/libs/userSignUp';
 import SignIn from '@/components/SignIn';
 
-const SignUpPage = () => {
+const SignUp = () => {
   const [isSignUp, setIsSignUp] = useState(true); // State to toggle between SignUp and SignIn
   const [name, setName] = useState('');
   const [tel, setTel] = useState('');
@@ -35,18 +36,7 @@ const SignUpPage = () => {
   return (
     <div>
       <div className={styles.toggleContainer}>
-        {/* <button
-          onClick={() => setIsSignUp(false)}
-          className={`${styles.toggleButton} ${!isSignUp ? styles.active : ''}`}
-        >
-          LOG IN
-        </button> */}
-        {/* <button
-          onClick={() => setIsSignUp(true)}
-          className={`${styles.toggleButton} ${isSignUp ? styles.active : ''}`}
-        >
-          CREATE AN ACCOUNT
-        </button> */}
+        {/* Removed toggle buttons if they aren't needed */}
       </div>
 
       {isSignUp ? (
@@ -117,4 +107,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUp;
