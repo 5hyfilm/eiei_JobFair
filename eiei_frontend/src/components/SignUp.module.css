@@ -54,7 +54,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 2.5rem; /* เพิ่มระยะห่างด้านล่าง */
+  margin-bottom: 0rem; /* เพิ่มระยะห่างด้านล่าง */
 }
 
 .toggleButton {

@@ -34,7 +34,7 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.toggleContainer}>
         {/* Removed toggle buttons if they aren't needed */}
       </div>
