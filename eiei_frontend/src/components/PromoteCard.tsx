@@ -40,7 +40,7 @@ export default function PromoteCard() {
                     {playing ? "Pause Video" : "Play Video"}
                 </button>
 
-                <div className="flex items-center space-x-3">
+                {/* <div className="flex items-center space-x-3">
                     <span className="text-gray-700">Rate this event:</span>
                     <Rating
                         className="text-yellow-400"
@@ -49,7 +49,7 @@ export default function PromoteCard() {
                             if (newValue != null) setRating(newValue);
                         }}
                     />
-                </div>
+                </div> */}
 
                 {/* <div className="absolute bottom-2 right-2 text-xs text-gray-500">
                     Pointer: X: {pointerPosition.x}, Y: {pointerPosition.y}
