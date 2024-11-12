@@ -31,20 +31,21 @@ const SignIn = () => {
 
   return (
     <div className={styles.container}>
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}>
+      <div className={styles.toggleContainer}>
         <button 
           onClick={() => setIsSignUp(false)} 
-          style={{ marginRight: "1rem", fontWeight: !isSignUp ? "bold" : "normal" }}
+          className={`${styles.toggleButton} ${!isSignUp ? styles.active : ''}`}
         >
           LOG IN
         </button>
         <button 
           onClick={() => setIsSignUp(true)} 
-          style={{ fontWeight: isSignUp ? "bold" : "normal" }}
+          className={`${styles.toggleButton} ${isSignUp ? styles.active : ''}`}
         >
           CREATE AN ACCOUNT
         </button>
       </div>
+      
       {isSignUp ? (
         <SignUp /> // Render SignUp component when `isSignUp` is true
       ) : (

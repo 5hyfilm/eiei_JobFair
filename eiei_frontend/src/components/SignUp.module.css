@@ -1,12 +1,11 @@
 /* SignUp.module.css */
 
 .form {
-  max-width: 600px; /* กำหนดขนาดความกว้างที่ต้องการ */
-  width: 100%; /* ให้ฟอร์มยืดเต็มความกว้างที่กำหนด */
-  margin: 3rem auto; /* กึ่งกลางหน้าจอ */
+  max-width: 600px;
+  width: 100%;
+  margin: 3rem auto;
   display: flex;
   flex-direction: column;
-  padding: 0; /* ลบ padding ในกรณีที่ไม่ต้องการ container รอบนอก */
   gap: 1rem;
 }
 
@@ -24,7 +23,7 @@
 }
 
 .formInput {
-  width: 100%; /* ยืดเต็มความกว้างของฟอร์ม */
+  width: 100%;
   padding: 1rem;
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
@@ -52,7 +51,7 @@
   background-color: #45a049;
 }
 
-/* Toggle button styles for "LOG IN" and "CREATE AN ACCOUNT" */
+/* Toggle button styles */
 .toggleContainer {
   display: flex;
   justify-content: center;
@@ -68,10 +67,15 @@
   border: none;
   background: none;
   color: #666;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
-.toggleButton.active {
+.toggleButton:hover {
   color: #4caf50;
-  border-bottom: 3px solid #4caf50;
+}
+
+.active {
+  color: #4caf50; /* สีเขียว */
+  border-bottom: 3px solid #4caf50; /* ขีดเส้นใต้ */
   padding-bottom: 0.5rem;
 }

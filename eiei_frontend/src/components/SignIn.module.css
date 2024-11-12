@@ -4,32 +4,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 500px; /* Increase max-width to make the form larger */
-  width: 100%;
-  margin: 3rem auto; /* Add some margin to center the form vertically */
-  background-color: #ffffff;
-  padding: 3rem; /* Increase padding for more space */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); /* Slightly larger shadow for emphasis */
-  border-radius: 10px; /* Larger border radius */
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-.tabs {
+.toggleContainer {
   display: flex;
+  justify-content: center;
   width: 100%;
-  justify-content: space-around;
-  margin-bottom: 2rem; /* Increase spacing between tabs and form */
+  margin-bottom: 1.5rem;
+}
+
+.toggleButton {
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 1.2rem; /* Increase font size for tabs */
-}
-
-.activeTab {
-  color: #4caf50; /* Green color */
-  border-bottom: 3px solid #4caf50; /* Increase border thickness */
-  padding-bottom: 0.5rem;
-}
-
-.inactiveTab {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background: none;
   color: #666;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.toggleButton:hover {
+  color: #4caf50;
+}
+
+.active {
+  color: #4caf50;
+  border-bottom: 3px solid #4caf50;
   padding-bottom: 0.5rem;
 }
 
@@ -53,11 +60,12 @@
 }
 
 .formInput {
-  padding: 1rem; /* Increase padding for larger input fields */
-  font-size: 1.1rem; /* Increase font size */
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 1.5rem;
   border: 1px solid #ccc;
-  border-radius: 6px; /* Increase border radius */
+  border-radius: 6px;
 }
 
 .formInput::placeholder {
@@ -65,97 +73,16 @@
 }
 
 .loginButton {
-  padding: 1rem; /* Increase padding for larger button */
-  font-size: 1.1rem; /* Increase font size */
+  padding: 1rem;
+  font-size: 1.1rem;
   color: #fff;
-  background-color: #4caf50; /* Green color */
+  background-color: #4caf50;
   border: none;
-  border-radius: 6px; /* Larger border radius */
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .loginButton:hover {
-  background-color: #45a049; /* Darker green */
+  background-color: #45a049;
 }
-/* SignIn.module.css */
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 500px; /* Increase max-width to make the form larger */
-    width: 100%;
-    margin: 3rem auto; /* Add some margin to center the form vertically */
-    background-color: #ffffff;
-    padding: 3rem; /* Increase padding for more space */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); /* Slightly larger shadow for emphasis */
-    border-radius: 10px; /* Larger border radius */
-  }
-  
-  .tabs {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    margin-bottom: 2rem; /* Increase spacing between tabs and form */
-    font-weight: bold;
-    font-size: 1.2rem; /* Increase font size for tabs */
-  }
-  
-  .activeTab {
-    color: #4caf50; /* Green color */
-    border-bottom: 3px solid #4caf50; /* Increase border thickness */
-    padding-bottom: 0.5rem;
-  }
-  
-  .inactiveTab {
-    color: #666;
-    padding-bottom: 0.5rem;
-  }
-  
-  .form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .formError {
-    color: red;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .formLabel {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 0.5rem;
-  }
-  
-  .formInput {
-    padding: 1rem; /* Increase padding for larger input fields */
-    font-size: 1.1rem; /* Increase font size */
-    margin-bottom: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 6px; /* Increase border radius */
-  }
-  
-  .formInput::placeholder {
-    color: #aaa;
-  }
-  
-  .loginButton {
-    padding: 1rem; /* Increase padding for larger button */
-    font-size: 1.1rem; /* Increase font size */
-    color: #fff;
-    background-color: #4caf50; /* Green color */
-    border: none;
-    border-radius: 6px; /* Larger border radius */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .loginButton:hover {
-    background-color: #45a049; /* Darker green */
-  }
-  
