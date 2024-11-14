@@ -22,7 +22,8 @@ export default function TopMenu(){
             />     
             <TopMenuItem title="Companies" pageRef="/mainpage"/>    
             <TopMenuItem title="My Booking" pageRef="/myBooking"/>    
-            
+            <TopMenuItem title="My Profile" pageRef="/myProfile"/>  
+
             {/* <div className="flex-1 flex items-center justify-start space-x-4">
                 <TopMenuItem title="Home" pageRef="/" />
             </div> */}
