@@ -1,12 +1,13 @@
-// components/SignIn.tsx
 "use client";
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import SignUp from "@/components/SignUp"; // Import SignUp component
 import styles from './SignIn.module.css'; // Import the CSS module for styling
 
 const SignIn = () => {
+  const [isSignUp, setIsSignUp] = useState(false); // New state for toggling
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -30,34 +31,49 @@ const SignIn = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.tabs}>
-        <span className={styles.activeTab}>LOG IN</span>
-        <span className={styles.inactiveTab}>CREATE AN ACCOUNT</span>
+      <div className={styles.toggleContainer}>
+        <button 
+          onClick={() => setIsSignUp(false)} 
+          className={`${styles.toggleButton} ${!isSignUp ? styles.active : ''}`}
+        >
+          LOG IN
+        </button>
+        <button 
+          onClick={() => setIsSignUp(true)} 
+          className={`${styles.toggleButton} ${isSignUp ? styles.active : ''}`}
+        >
+          CREATE AN ACCOUNT
+        </button>
       </div>
-      <form onSubmit={handleLogin} className={styles.form}>
-        {error && <p className={styles.formError}>{error}</p>}
-        <label htmlFor="email" className={styles.formLabel}>Email</label>
-        <input
-          type="email"
-          id="email"
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-          placeholder="Email Address"
-          required
-          className={styles.formInput}
-        />
-        <label htmlFor="password" className={styles.formLabel}>Password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-          className={styles.formInput}
-        />
-        <button type="submit" className={styles.loginButton}>Login</button>
-      </form>
+      
+      {isSignUp ? (
+        <SignUp /> // Render SignUp component when `isSignUp` is true
+      ) : (
+        <form onSubmit={handleLogin} className={styles.form}>
+          {error && <p className={styles.formError}>{error}</p>}
+          <label htmlFor="email" className={styles.formLabel}>Email</label>
+          <input
+            type="email"
+            id="email"
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+            placeholder="Email Address"
+            required
+            className={styles.formInput}
+          />
+          <label htmlFor="password" className={styles.formLabel}>Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+            className={styles.formInput}
+          />
+          <button type="submit" className={styles.loginButton}>Login</button>
+        </form>
+      )}
     </div>
   );
 };

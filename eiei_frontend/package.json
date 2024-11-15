@@ -13,6 +13,9 @@
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.5",
     "@mui/x-date-pickers": "^7.22.0",
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.13",
     "mongoose": "^8.8.1",
     "next": "14.2.14",
@@ -21,6 +24,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
