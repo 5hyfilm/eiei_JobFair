@@ -1,34 +1,81 @@
+/* Base styles */
 .menucontainer {
-    height: 50px;
-    background-color: white;
-    position: fixed; /*อยู่กับที่*/
-    top: 0px;
-    left: 0px; /*ชิดซ้าย*/
-    right: 0px;
-    z-index: 30; /*ว่าอยู่ layer บนสุด*/
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgray;
-    
-    /*ของที่วางจะมีลักษณะ*/
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 30;
+    height: 4rem;
+    border-bottom: 2px solid #ddd;
 }
 
-.logoimg{
-    height: 100%;
-    width: auto; 
-    /* ให้กว้างสัมพันธ์กับความสูง */
-
-    /* size: 100vh; */
-    
+/* Logo styling */
+.logo {
+    height: auto;
+    margin-left: 0.5rem;
 }
 
-.itemcontainer{
-    width:120px;
+/* Hamburger menu button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+}
+
+/* Menu styles */
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    right: 0.5rem;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+/* Authentication button */
+.auth {
+    margin-left: auto;
+    padding: 0.5rem;
+    font-weight: bold;
+    border: 1px solid #00bcd4;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
     text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 13px;
-    color: grey;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 }

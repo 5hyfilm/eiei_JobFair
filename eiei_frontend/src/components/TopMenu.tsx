@@ -1,46 +1,55 @@
-"use client"
-import Link from "next/link"
-import Image from "next/image"
-import styles from "./topmenu.module.css"
-import TopMenuItem from "./TopMenuItem"
-import { getServerSession } from "next-auth"
-import { useSession } from "next-auth/react"
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import styles from "./topmenu.module.css";
+import TopMenuItem from "./TopMenuItem";
+import { useSession } from "next-auth/react";
 
-export default function TopMenu(){
+export default function TopMenu() {
     const { data: session } = useSession();
-    return(
- 
-        // <div className="h-14 bg-white fixed top-0 left-0 right-0 z-30 flex items-center justify-end border-y-2 border-slate-300">
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen((prev) => !prev);
+    };
+
+    return (
         <div className={styles.menucontainer}>
-            <Image src={'/img/logo.png'}
-                className="h-[100%] w-auto ml-1 right-100"
+            {/* Logo */}
+            <Image
+                src="/img/logo.png"
+                className={styles.logo}
                 width={0}
                 height={0}
                 sizes="100vh"
                 alt="logo"
-            />     
-            <TopMenuItem title="Companies" pageRef="/mainpage"/>    
-            <TopMenuItem title="My Booking" pageRef="/myBooking"/>    
-            <TopMenuItem title="My Profile" pageRef="/myProfile"/>  
+            />
 
-            {/* <div className="flex-1 flex items-center justify-start space-x-4">
-                <TopMenuItem title="Home" pageRef="/" />
-            </div> */}
-            
-            <div className="ml-auto mr-4 p-2 flex items-center  my-auto font-serif font-bold text-md text-white  content-center  border-2 border-cyan-500 rounded-lg bg-green-500"> 
-            {   session?<Link href='/api/auth/signout'><div className="text-sm">
-                        Sign-Out</div>
-                        </Link>
-                :<Link href='/api/auth/signin'><div className="flex items-center  px-2 text-sm ">
-                        Sign-In</div>
-                </Link>
-            }
+            {/* Hamburger Button */}
+            <div className={styles.hamburger} onClick={toggleMenu}>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
 
+            {/* Menu Items */}
+            <ul className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}>
+                <TopMenuItem title="Companies" pageRef="/mainpage" />
+                <TopMenuItem title="My Booking" pageRef="/myBooking" />
+                <TopMenuItem title="My Profile" pageRef="/myProfile" />
+                <li className={styles.auth}>
+                    {session ? (
+                        <Link href="/api/auth/signout">
+                            <div>Sign-Out</div>
+                        </Link>
+                    ) : (
+                        <Link href="/api/auth/signin">
+                            <div>Sign-In</div>
+                        </Link>
+                    )}
+                </li>
+            </ul>
         </div>
-    )
+    );
 }
- 
-
- 
