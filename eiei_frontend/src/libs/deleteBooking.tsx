@@ -1,5 +1,5 @@
 export default async function deleteBooking(token:string,bookingID:string){
-    const response= await fetch(`http://localhost:5001/api/v1/bookings/${bookingID}`,{
+    const response= await fetch(`https://eiei-jobfair-backend.vercel.app/api/v1/bookings/${bookingID}`,{
         method:"DELETE",
         headers:{
             authorization: `Bearer ${token}`

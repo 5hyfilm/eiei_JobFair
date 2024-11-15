@@ -12,11 +12,8 @@ export default async function myBookngPage(){
     const session = await getServerSession(authOptions)
     if(!session || !session.user.token) return null
     const profile= await getUserProfile(session.user.token)
-    console.log("CHECKER",profile.data._id)
-    // console.log("OK")
-    // console.log(profile.user.token)
-    // const companies=  getBookings(session.user.token)//ต้องแก้ API 
-    // // console.log(companies.data)
+    console.log(session.user.token)
+ 
     return(
         <main className="text-center p-5 text-black">
             <h1 className="text-xl font-medium">Your Companies Booking List</h1>

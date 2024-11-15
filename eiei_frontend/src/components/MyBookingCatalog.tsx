@@ -3,21 +3,27 @@ import Link from "next/link";
 import styles from "../app/page.module.css";
 import CompanyCard from "./CompanyCard";
 import { useEffect, useState } from "react";
- 
+import Image from "next/image";
 import getBookings from "@/libs/getBookings";
 import deleteBooking from "@/libs/deleteBooking";
+import BookingCard from "./BookingCard";
 
 type BookingResponse = {
     data: BookingItem[];
 };
+type CarResponse={
+    data: CompanyItem[];
+};
 export default function MyBookingCatalogue({Profile_id,token}:{Profile_id:string,token:string}){
     const [bookingResponse, setBookingResponse] = useState<BookingResponse | null>(null);
+    // const [companyResponse, setCompanyResponse] = useState<CarResponse| null> (null);
     useEffect(()=>{
         const fetchData=async()=>{
             const booking = await getBookings(token)
             setBookingResponse(booking)
         }
         fetchData()
+
     },[])  
  
     async function removeBooking(Booking_ID: string) {
@@ -37,14 +43,16 @@ export default function MyBookingCatalogue({Profile_id,token}:{Profile_id:string
             <div className={styles.card_layout}>
             {
                     bookingResponse.data.map((bookingItem:BookingItem)=>( //ตอนนี้ข้อมูลมาจาก API ตอนนี้เป็น child ต่อจาก flexs
-                        <Link href={`/mainpage/${bookingItem._id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8"> 
-                        <CompanyCard imgSrc={bookingItem.company.picture} companyName={bookingItem.company.name} id={bookingItem._id}
+                        <Link href={`/mainpage/${bookingItem.company.id}?reserve=${bookingItem.bookingDate}&booking=${bookingItem._id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8" key={`${bookingItem._id}`} > 
+                        <BookingCard companyName={bookingItem.company.name} id={bookingItem._id} reservationDate={bookingItem.bookingDate.slice(0,10)} 
                         onRemoveReservation={(id:string)=>removeBooking(id)}/>
                          </Link>
+                    
                        
                     ))
                 }
             </div>
+             
         </div>
     )
 }

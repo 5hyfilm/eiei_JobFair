@@ -8,9 +8,12 @@ import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
 
 export default async function Page(){
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions) 
     if(!session || !session.user.token) return null
     const profile= await getUserProfile(session.user.token)
+    const role =profile.data.role
+    // sessionStorage.setItem('token',session.user.token)
+    // console.log(sessionStorage.getItem('token'))
     console.log(profile.data)
     console.log("OK")
 
@@ -21,9 +24,14 @@ export default async function Page(){
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
                 <CompanyCatalogue companiesJson={companies}/>
             </Suspense>
-            <Link href={"/manage"}>
-                 <button>Create</button>
-            </Link>
+            
+            { // may be move to topmenu
+                (role=="admin")?
+                <Link href={"/manage"}>
+                    <button>Create</button>
+                </Link>
+                :null
+            }
         </main>
     )
 }

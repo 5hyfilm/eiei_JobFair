@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function CompanyCard({companyName,imgSrc,id,onRemoveReservation}:{companyName:string,imgSrc:string,id:string,onRemoveReservation?:Function}){
+export default function CompanyCard({companyName,imgSrc,id,onRemoveReservation,onEditReservation}:{companyName:string,imgSrc:string,id:string,onRemoveReservation?:Function,onEditReservation?:Function}){
     return(
         <div className="w-full h-[500px] rounded-lg shadow-lg bg-white">
             <div className="w-full h-[40%] relative rounded-t-lg">
@@ -22,8 +22,13 @@ export default function CompanyCard({companyName,imgSrc,id,onRemoveReservation}:
                     </div>
                     {onRemoveReservation? <button className="block h-[10%] rounded-md bg-sky-600 hover:bg-indigo-600 mx-2 px-1 py-1 
                     text-white shadow-sm items-center "
-                    onClick={(e)=>{e.preventDefault();onRemoveReservation(id)}} // เพราะมันเป็น button เลยใช้อันนี้ ป้องกันจาก Link คาดว่า
-                >   Remove</button>: ''}
+                    onClick={(e)=>{e.preventDefault();onRemoveReservation(id)}}> 
+                   Remove</button>: ''}
+                    {/* // เพราะมันเป็น button เลยใช้อันนี้ ป้องกันจาก Link คาดว่า */}
+                   {onEditReservation? <button className="block h-[10%] rounded-md bg-sky-600 hover:bg-indigo-600 mx-2 px-1 py-1 
+                    text-white shadow-sm items-center "
+                    onClick={(e)=>{e.preventDefault();onEditReservation(id)}}>  
+                   Edit</button>: ''}
                 </div>
             </div>
     )
