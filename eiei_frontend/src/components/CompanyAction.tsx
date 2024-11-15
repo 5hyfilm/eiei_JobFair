@@ -3,6 +3,7 @@
 import Company from "@/db/Company"
 import { dbConnect } from "@/db/dbConnect"
 import { revalidateTag } from "next/cache"
+import { redirect } from "next/dist/server/api-utils"
 
 export async function addCompany(addCompanyForm:FormData){
     const name= addCompanyForm.get("name")
@@ -26,8 +27,10 @@ export async function addCompany(addCompanyForm:FormData){
             "picture":pic
         })
         console.log("success")
+        
     }catch(error){
         console.log(error)
     }
     revalidateTag("companies")
+ 
 }

@@ -2,15 +2,15 @@ import Image from "next/image";
 
 export default function CompanyCard({companyName,imgSrc,id,onRemoveReservation,onEditReservation}:{companyName:string,imgSrc:string,id:string,onRemoveReservation?:Function,onEditReservation?:Function}){
     return(
-        <div className="w-full h-[500px] rounded-lg shadow-lg bg-white">
-            <div className="w-full h-[40%] relative rounded-t-lg">
+        <div className="w-full h-[300px] rounded-lg shadow-lg bg-white">
+            <div className="w-full h-[60%] relative rounded-t-lg">
                 <Image src={imgSrc}
                     alt={companyName}
                     fill={true}
                     className="object-cover rounded-t-lg"        
                     />    
                 </div>
-                <div className="w-full h-[60%] p-[10px] text-black">
+                <div className="w-full h-[40%] p-[10px] text-black">
                     {/* <div className={style.vaccine_name}>Rabies vaccine</div> */}
                     <div className="font-bold font-serif text-center p-2">
                         {companyName}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import getCompanies from "@/libs/getCompanies";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
+import getBookings from "@/libs/getBookings";
 
 export default async function Page(){
     const session = await getServerSession(authOptions) 
@@ -17,12 +18,13 @@ export default async function Page(){
     console.log(profile.data)
     console.log("OK")
 
-    const companies= getCompanies()
+    const companies= await getCompanies()
+    const booking= await getBookings(session.user.token)
     return(
         <main className="text-center p-5 text-black">
             <h1 className="text-xl font-medium">All Companies List</h1>
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
-                <CompanyCatalogue companiesJson={companies}/>
+                <CompanyCatalogue companiesJson={companies} booking={booking}/>
             </Suspense>
             
             { // may be move to topmenu
