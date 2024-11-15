@@ -24,7 +24,7 @@ export default async function Page(){
         <main className="text-center p-5 text-black">
             <h1 className="text-xl font-medium">All Companies List</h1>
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
-                <CompanyCatalogue companiesJson={companies} booking={booking}/>
+                <CompanyCatalogue companiesJson={companies}/>
             </Suspense>
             
             { // may be move to topmenu

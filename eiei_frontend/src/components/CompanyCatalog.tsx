@@ -3,22 +3,9 @@ import styles from "../app/page.module.css";
 import CompanyCard from "./CompanyCard";
 import { redirect } from "next/navigation";
 
-export default  function CompanyCatalogue({companiesJson,booking}:{companiesJson:CompanyJson,booking:BookingJson}){
+export default  function CompanyCatalogue({companiesJson}:{companiesJson:CompanyJson}){
     const companyJsonReady=companiesJson
-    // console.log(booking)
-
-    const companiesWithBookings = companyJsonReady.data.map((companyItem: CompanyItem) => {
-        const bookingMatch = booking.data.find((bookingItem: any) => {
-            return bookingItem.company.name === companyItem.name;
-        });
-
-        return {
-            ...companyItem,
-            bookingDate: bookingMatch ? bookingMatch.bookingDate : null,
-            bookingId: bookingMatch ? bookingMatch._id : null
-        };
-    });
-    // console.log(companiesWithBookings)
+  
 
     return(
         <div>

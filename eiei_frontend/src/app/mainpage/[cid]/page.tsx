@@ -37,7 +37,7 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
     useEffect(()=>{
         const fetchData= async()=>{
             const company = await getCompany(params.cid)
-            setCompanyDetail(company)
+            setCompanyDetail(company.data)
         }
         fetchData()
     },[])
@@ -100,21 +100,21 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
     if(!companyDetail || !session) return(<Suspense>Loading Company</Suspense>)
     return (
         <main className="text-center p-5">
-                <h1 className="text-xl font-medium"> Company {companyDetail.data.name}</h1> 
-                <h1 className="text-xl font-medium"> Edit you Information {companyDetail.data.name}</h1> 
+                <h1 className="text-xl font-medium"> Company {companyDetail.name}</h1> 
+                <h1 className="text-xl font-medium"> Edit you Information {companyDetail.name}</h1> 
                 <div className="flex flex-row my-5">
-                        <Image src={companyDetail.data.picture}
+                        <Image src={companyDetail.picture}
                         alt='Product Picture'
                         width={0} height={0} sizes="100vw"
                         className="rounded-xl w-[40%] bg-black"
                         />
                         <div className="text-md mx-5 text-left w-[60%]">
                             {/* <div className="text-md mx-5">Description{companyDetail.data.description}</div> */}
-                            <div className="text-md mx-5">Name: {companyDetail.data.name}</div>
-                            <div className="text-md mx-5">Business:{companyDetail.data.business}</div>
-                           <div className="text-md mx-5">Address {companyDetail.data.address}</div>
-                            <div className="text-md mx-5">PostalCode: {companyDetail.data.postalcode}</div> 
-                            <div className="text-md mx-5">Telephone: {companyDetail.data.tel}</div>
+                            <div className="text-md mx-5">Name: {companyDetail.name}</div>
+                            <div className="text-md mx-5">Business:{companyDetail.business}</div>
+                           <div className="text-md mx-5">Address {companyDetail.address}</div>
+                            <div className="text-md mx-5">PostalCode: {companyDetail.postalcode}</div> 
+                            <div className="text-md mx-5">Telephone: {companyDetail.tel}</div>
                             <DateReserve initialDate={bookingDate} onDateChange={(value:Dayjs)=>setBookingDate(value)}></DateReserve>
                         </div>
                 </div>
@@ -123,7 +123,7 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
                 <div className="px-5">
                 {
                     (myRole=='admin')?
-                    <Link href={`/edit/${companyDetail.data.id}`}>
+                    <Link href={`/edit/${companyDetail.id}`}>
                     <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white">
                         Edit Company
                     </button>

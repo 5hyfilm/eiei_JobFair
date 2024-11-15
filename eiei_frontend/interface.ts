@@ -1,5 +1,5 @@
 interface CompanyItem {
-    data: any;
+    // data: any;
     // data: any; // Need fix
     _id: string,
     name: string,
