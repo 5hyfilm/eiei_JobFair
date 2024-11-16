@@ -16,7 +16,7 @@ export default async function myBookngPage(){
  
     return(
         <main className="text-center p-5 text-black">
-            <h1 className="text-xl font-medium">Your Companies Booking List</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-green-600 mb-4">Your Companies Booking List</h1>
           
                 <MyBookingCatalogue Profile_id={profile.data._id} token={session.user.token}/>
            

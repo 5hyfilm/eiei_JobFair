@@ -15,11 +15,11 @@ export default function DateReserve({
   const [value, setValue] = useState<Dayjs>(dayjs(initialDate));
 
   return (
-    <div className="flex flex-col items-center p-5 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-xl font-bold text-gray-800 mb-4">
-        Reserve Your Date
+    <div className="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg max-w-md mx-auto">
+      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+        Select Your Date
       </h1>
-      <div className="w-full max-w-sm">
+      <div className="w-full">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar
             value={value}
@@ -42,7 +42,7 @@ export default function DateReserve({
           />
         </LocalizationProvider>
       </div>
-      <p className="mt-4 text-sm text-gray-500">
+      <p className="mt-4 text-gray-600 text-sm">
         Selected Date:{" "}
         <span className="font-medium text-gray-800">
           {value ? value.format("YYYY-MM-DD") : "No date selected"}

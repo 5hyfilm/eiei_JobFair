@@ -20,7 +20,7 @@ export default async function Page() {
   const companies = getCompanies();
   return (
     <main className="text-center p-5 text-black">
-      <h1 className="text-3xl font-extrabold text-gray-800 tracking-wide">
+      <h1 className="text-4xl sm:text-5xl font-bold text-green-600 mb-4">
         🌟 All Companies List
       </h1>
       <p className="text-sm text-gray-600 mt-2">
