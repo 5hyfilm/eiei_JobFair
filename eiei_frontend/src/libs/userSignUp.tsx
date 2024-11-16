@@ -1,5 +1,5 @@
 export default async function userSignUp(name: string, email: string, tel: string, password: string) {
-  const response = await fetch("http://localhost:5001/api/v1/auth/register", {
+  const response = await fetch("https://eiei-jobfair-backend.vercel.app/api/v1/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

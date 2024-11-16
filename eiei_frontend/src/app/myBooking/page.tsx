@@ -12,7 +12,7 @@ export default async function myBookngPage(){
     const session = await getServerSession(authOptions)
     if(!session || !session.user.token) return null
     const profile= await getUserProfile(session.user.token)
-    console.log(session.user.token)
+ 
  
     return(
         <main className="text-center p-5 text-black">

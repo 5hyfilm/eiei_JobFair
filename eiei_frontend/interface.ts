@@ -40,7 +40,7 @@ interface CompanyItem {
     bookingDate:string,
     user:string,
     id: string,
-    company: CompanyItem[]
+    company: CompanyItem
   }
 
   interface BookingJson {

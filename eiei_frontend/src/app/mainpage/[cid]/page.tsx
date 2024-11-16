@@ -22,7 +22,7 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
     const reserveID= urlParams.get('booking')
     var initialDate:Dayjs= dayjs(new Date())
 
-    // console.log("check",initialDate)
+
     if(reserveDate){
         initialDate=dayjs(reserveDate)
     }
@@ -30,6 +30,7 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
   
    const [bookingDate, setBookingDate] = useState<Dayjs>(initialDate);
     const {data:session}=useSession()
+
  
     
     
@@ -45,51 +46,52 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
     const [myRole,setRoleData]=useState<string>("")
     useEffect(()=>{
         const fetchRole =async()=>{
-            // console.log(session?.user.token)
+           
             const roleData=await getUserProfile(session?.user.token??'')
-            console.log(roleData)
+         
             setRoleData(roleData.data.role)
         }
         fetchRole()
-        console.log(myRole)
     },[])
 
     const [myQuantityBooking,setQuantityBooking]=useState<number>(0)
     useEffect(()=>{
         const fetchBookings =async()=>{
             const bookData=await getBookings(session?.user.token??'')
-            console.log(bookData)
-            // setQuantityBooking(bookData.count)
-            setQuantityBooking(bookData.data.length)
+            var counter=0
+            bookData.data.filter((eachBook: BookingItem) => {
+                if (session?.user._id === eachBook.user) {
+                  counter++;
+                }
+              });
+            setQuantityBooking(counter)
+            // console.log(bookData.data)
         }
         fetchBookings()
-        // setQuantityBooking(bookData)
-        // console.log(myQuantityBooking)
     },[])
 
 
     async function postBooking(newValue:Dayjs){
-        if(myQuantityBooking>=3){
-            alert("You couldn't book more than 3 places")
-            return;
-        }
         if(reserveID && session){
             try{
-                console.log(reserveID)
                 const formattedDate = newValue.format('MM/DD/YYYY')
                 const send= await pushingCompany(formattedDate,session?.user.token,reserveID) 
-            alert("update success")
-            revalidateTag("companies")
+                alert("update success")
+            // revalidateTag("companies")
             }catch{
                 alert("fail update")
             }
         }
         else if(session){
+            if(myQuantityBooking>=3){
+                alert("You couldn't book more than 3 places")
+                return;
+            }
             try{
                 const formattedDate = newValue.format('MM/DD/YYYY')
                 const send= await bookingCompany(formattedDate,session.user.token,params.cid) 
-            alert("success")
-            revalidateTag("companies")
+                alert("success")
+            // revalidateTag("companies")
             }catch{
                 alert("fail")
             }
@@ -137,7 +139,7 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
                         </button>
                 </div>
             </div>
-                <div>ALL {myQuantityBooking}</div>
+                {/* <div>ALL {myQuantityBooking}</div> */}
         </main>
     )
 }
