@@ -12,7 +12,7 @@ export default function BookingCard({companyName,id,reservationDate,onRemoveRese
         </div>
         {onRemoveReservation ? (
             <button 
-                className="block h-[20%] rounded-md bg-sky-600 hover:bg-indigo-600 mx-auto px-1 py-1 
+                className="block h-[20%] rounded-md bg-[#4BA24D] hover:bg-indigo-600 mx-auto px-1 py-1 
                 text-white shadow-sm items-center justify-center"
                 onClick={(e) => { e.preventDefault(); onRemoveReservation(id); }}
             > 
@@ -21,7 +21,7 @@ export default function BookingCard({companyName,id,reservationDate,onRemoveRese
         ) : ''}
         {onEditReservation ? (
             <button 
-                className="block h-[10%] rounded-md bg-sky-600 hover:bg-indigo-600 mx-auto px-1 py-1 
+                className="block h-[10%] rounded-md bg-[#4BA24D] hover:bg-indigo-600 mx-auto px-1 py-1 
                 text-white shadow-sm items-center"
                 onClick={(e) => { e.preventDefault(); onEditReservation(id); }}
             >  

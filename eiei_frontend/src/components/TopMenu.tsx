@@ -17,14 +17,15 @@ export default function TopMenu() {
     return (
         <div className={styles.menucontainer}>
             {/* Logo */}
-            <Image
-                src="/img/logo.png"
-                className={styles.logo}
-                width={0}
-                height={0}
-                sizes="100vh"
-                alt="logo"
-            />
+            <Link href="/">
+                <Image
+                    src="/img/logo.png"
+                    className={styles.logo}
+                    width={240} // Specify a default width
+                    height={80} // Specify a default height
+                    alt="logo"
+                />
+            </Link>
 
             {/* Hamburger Button */}
             <div className={styles.hamburger} onClick={toggleMenu}>

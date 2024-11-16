@@ -1,9 +1,10 @@
 import Link from "next/link";
+import styles from "./topmenu.module.css";
 
-export default function TopMenuItem({title,pageRef}:{title:string,pageRef:string}){
-    return(
-    <Link className="h-14 text-center my-auto font-serif font-bold text-md text-black w-40 content-center   mx-0" href={pageRef}>
-        {title}
-    </Link>
-    )
+export default function TopMenuItem({ title, pageRef }: { title: string; pageRef: string }) {
+    return (
+        <Link className={styles.topMenuItem} href={pageRef}>
+            {title}
+        </Link>
+    );
 }

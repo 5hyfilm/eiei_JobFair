@@ -34,7 +34,7 @@ export default function PromoteCard() {
                 </div>
                 
                 <button
-                    className="mb-4 rounded-md bg-sky-600 hover:bg-indigo-600 px-4 py-2 text-white shadow-md transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring focus:ring-sky-400"
+                    className="mb-4 rounded-md bg-[#4BA24D] hover:bg-indigo-600 px-4 py-2 text-white shadow-md transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring focus:ring-sky-400"
                     onClick={() => setPlaying(!playing)}
                 >
                     {playing ? "Pause Video" : "Play Video"}
