@@ -29,14 +29,14 @@ export default function DateReserve({
             }}
             sx={{
               "& .Mui-selected": {
-                backgroundColor: "#4CAF50",
-                color: "#FFF",
+                backgroundColor: "#4CAF50 !important",
+                color: "#FFF !important",
               },
               "& .Mui-selected:hover": {
-                backgroundColor: "#388E3C",
+                backgroundColor: "#388E3C !important",
               },
               "& .Mui-selected:focus": {
-                backgroundColor: "#4CAF50",
+                backgroundColor: "#4CAF50 !important",
               },
             }}
           />
