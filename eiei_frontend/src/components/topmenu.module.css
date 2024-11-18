@@ -104,3 +104,9 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* เพิ่มความเข้มของเงา */
     border-color: #4caf50;
 }
+
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
