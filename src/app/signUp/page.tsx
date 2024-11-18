@@ -1,3 +1,5 @@
+"use client"
+
 // app/signUp/page.tsx
 import { useState } from "react";
 import SignIn from "@/components/SignIn";
