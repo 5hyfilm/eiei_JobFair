@@ -1,5 +1,6 @@
 interface CompanyItem {
-    data: any; // Need fix
+    // data: any;
+    // data: any; // Need fix
     _id: string,
     name: string,
     business: string,
@@ -39,7 +40,7 @@ interface CompanyItem {
     bookingDate:string,
     user:string,
     id: string,
-    company:string
+    company: CompanyItem
   }
 
   interface BookingJson {

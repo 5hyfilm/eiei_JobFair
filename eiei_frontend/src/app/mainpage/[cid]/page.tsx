@@ -1,113 +1,147 @@
-"use client";
+'use client'
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions"
+import DateReserve from "@/components/DateReserve"
+import getBookings from "@/libs/getBookings"
+import getCompany from "@/libs/getCompany"
+import getUserProfile from "@/libs/getUserProfile"
+import bookingCompany from "@/libs/postBooking"
+import pushingCompany from "@/libs/pushBooking"
+import { DatePicker } from "@mui/x-date-pickers"
+import dayjs, { Dayjs } from "dayjs"
+import { getServerSession } from "next-auth"
+import { useSession } from "next-auth/react"
+import { revalidateTag } from "next/cache"
+import Image from "next/image"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { Suspense, useEffect, useState } from "react"
+export default function CompanyDetailPage({params}:{params:{cid:string}}){
 
-import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import Image from "next/image";
-import Link from "next/link";
-import getCompany from "@/libs/getCompany";
-import bookingCompany from "@/libs/postBooking";
-import pushingCompany from "@/libs/pushBooking";
-import DateReserve from "@/components/DateReserve";
+    const urlParams=useSearchParams()
+    const reserveDate= urlParams.get('reserve')
+    const reserveID= urlParams.get('booking')
+    var initialDate:Dayjs= dayjs(new Date())
 
-export default function CompanyDetailPage({ params }: { params: { cid: string } }) {
-    const urlParams = useSearchParams();
-    const reserveDate = urlParams.get("reserve");
-    const reserveID = urlParams.get("booking");
-    const initialDate: Dayjs = reserveDate ? dayjs(reserveDate) : dayjs();
 
-    const [bookingDate, setBookingDate] = useState<Dayjs>(initialDate);
-    const { data: session } = useSession();
-    const roleUser = session?.user.role;
-
-    const [companyDetail, setCompanyDetail] = useState<CompanyItem | null>(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const company = await getCompany(params.cid);
-            setCompanyDetail(company);
-        };
-        fetchData();
-    }, [params.cid]);
-
-    async function postBooking(newValue: Dayjs) {
-        try {
-            const formattedDate = newValue.format("MM/DD/YYYY");
-            if (reserveID && session) {
-                await pushingCompany(formattedDate, session.user.token, reserveID);
-                alert("Update successful!");
-            } else if (session) {
-                await bookingCompany(formattedDate, session.user.token, params.cid);
-                alert("Booking successful!");
-            }
-        } catch {
-            alert("Action failed. Please try again.");
-        }
+    if(reserveDate){
+        initialDate=dayjs(reserveDate)
     }
 
-    if (!companyDetail || !session) return <p className="text-center text-lg mt-20">Loading Company...</p>;
+  
+   const [bookingDate, setBookingDate] = useState<Dayjs>(initialDate);
+    const {data:session}=useSession()
 
+ 
+    
+    
+    const [companyDetail,setCompanyDetail]=useState<CompanyItem|null>(null)
+    useEffect(()=>{
+        const fetchData= async()=>{
+            const company = await getCompany(params.cid)
+            setCompanyDetail(company.data)
+        }
+        fetchData()
+    },[])
+
+    const [myRole,setRoleData]=useState<string>("")
+    useEffect(()=>{
+        const fetchRole =async()=>{
+           
+            const roleData=await getUserProfile(session?.user.token??'')
+         
+            setRoleData(roleData.data.role)
+        }
+        fetchRole()
+    },[])
+
+    const [myQuantityBooking,setQuantityBooking]=useState<number>(0)
+    useEffect(()=>{
+        const fetchBookings =async()=>{
+            const bookData=await getBookings(session?.user.token??'')
+            var counter=0
+            bookData.data.filter((eachBook: BookingItem) => {
+                if (session?.user._id === eachBook.user) {
+                  counter++;
+                }
+              });
+            setQuantityBooking(counter)
+            // console.log(bookData.data)
+        }
+        fetchBookings()
+    },[])
+
+
+    async function postBooking(newValue:Dayjs){
+        if(reserveID && session){
+            try{
+                const formattedDate = newValue.format('MM/DD/YYYY')
+                const send= await pushingCompany(formattedDate,session?.user.token,reserveID) 
+                alert("update success")
+            // revalidateTag("companies")
+            }catch{
+                alert("fail update")
+            }
+        }
+        else if(session){
+            if(myQuantityBooking>=3){
+                alert("You couldn't book more than 3 places")
+                return;
+            }
+            try{
+                const formattedDate = newValue.format('MM/DD/YYYY')
+                const send= await bookingCompany(formattedDate,session.user.token,params.cid) 
+                alert("success")
+            // revalidateTag("companies")
+            }catch{
+                alert("fail")
+            }
+    }
+        
+
+    }
+    if(!companyDetail || !session) return(<Suspense>Loading Company</Suspense>)
     return (
-        <main className="p-6 bg-gray-100 min-h-screen text-gray-800">
-            <div className="text-center mb-10">
-                <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
-                    {companyDetail.data.name}
-                </h1>
-                <h2 className="text-xl sm:text-2xl font-medium text-gray-600">
-                    Manage Your Booking
-                </h2>
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
-                <Image
-                    src={companyDetail.data.picture}
-                    alt={`${companyDetail.data.name} Picture`}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="rounded-lg shadow-md bg-gray-300 w-full md:w-1/3"
-                />
-                <div className="w-full md:w-1/3 space-y-4">
-                    <p className="text-gray-600">
-                        <strong>Telephone:</strong> {companyDetail.data.tel}
-                    </p>
-                    <p className="text-gray-600">
-                        <strong>Business:</strong> {companyDetail.data.business}
-                    </p>
-                    <p className="text-gray-600">
-                        <strong>Address:</strong> {companyDetail.data.address}
-                    </p>
-                    <p className="text-gray-600">
-                        <strong>Province:</strong> {companyDetail.data.province}
-                    </p>
-                    <p className="text-gray-600">
-                        <strong>Postal Code:</strong> {companyDetail.data.postalcode}
-                    </p>
+        <main className="text-center p-5">
+                <h1 className="text-xl font-medium"> Company {companyDetail.name}</h1> 
+                <h1 className="text-xl font-medium"> Edit you Information {companyDetail.name}</h1> 
+                <div className="flex flex-row my-5">
+                        <Image src={companyDetail.picture}
+                        alt='Product Picture'
+                        width={0} height={0} sizes="100vw"
+                        className="rounded-xl w-[40%] bg-black"
+                        />
+                        <div className="text-md mx-5 text-left w-[60%]">
+                            {/* <div className="text-md mx-5">Description{companyDetail.data.description}</div> */}
+                            <div className="text-md mx-5">Name: {companyDetail.name}</div>
+                            <div className="text-md mx-5">Business:{companyDetail.business}</div>
+                           <div className="text-md mx-5">Address {companyDetail.address}</div>
+                            <div className="text-md mx-5">PostalCode: {companyDetail.postalcode}</div> 
+                            <div className="text-md mx-5">Telephone: {companyDetail.tel}</div>
+                            <DateReserve initialDate={bookingDate} onDateChange={(value:Dayjs)=>setBookingDate(value)}></DateReserve>
+                        </div>
                 </div>
-                <div className="w-full md:w-1/4">
-                    <DateReserve
-                        initialDate={bookingDate}
-                        onDateChange={(value: Dayjs) => setBookingDate(value)}
-                    />
-                </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-                {roleUser === "admin" && (
-                    <Link href={`/edit/${companyDetail.data.id}`}>
-                        <button className="rounded-lg bg-blue-600 hover:bg-blue-700 px-6 py-3 text-white font-medium shadow-md transition-all w-full sm:w-auto">
-                            Edit Company
-                        </button>
+            <div className="flex flex-row justify-center p-5">
+                <div className="px-5">
+                {
+                    (myRole=='admin')?
+                    <Link href={`/edit/${companyDetail.id}`}>
+                    <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white">
+                        Edit Company
+                    </button>
                     </Link>
-                )}
-                <button
-                    onClick={() => postBooking(bookingDate)}
-                    className="rounded-lg bg-green-600 hover:bg-green-700 px-6 py-3 text-white font-medium shadow-md transition-all w-full sm:w-auto"
-                >
-                    Make Reservation
-                </button>
+                    :null
+                }
+                </div>
+                <div className="px-5">
+                        <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white" onClick={()=>{postBooking(bookingDate)}}>
+                            Reservation
+                        </button>
+                </div>
             </div>
+                {/* <div>ALL {myQuantityBooking}</div> */}
         </main>
-    );
+    )
 }
+
+ 
