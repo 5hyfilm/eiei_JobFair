@@ -1,7 +1,7 @@
  
 
 export default async function bookingCompany(bookingDate:string,token:string,companyID:string){
-    const response= await fetch(`https://eiei-jobfair-backend.vercel.app/api/v1/companies/${companyID}/bookings`,{
+    const response= await fetch(`${process.env.BACKEND_URL}/api/v1/companies/${companyID}/bookings`,{
         method:"POST",
         headers:{
             'Content-Type': 'application/json',

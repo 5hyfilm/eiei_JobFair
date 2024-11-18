@@ -1,5 +1,5 @@
  export default async function pushingCompany(bookingDate:string,token:string,bookingID:string){
-    const response= await fetch(`https://eiei-jobfair-backend.vercel.app/api/v1/bookings/${bookingID}`,{
+    const response= await fetch(`${process.env.BACKEND_URL}/api/v1/bookings/${bookingID}`,{
         method:"PUT",
         headers:{
             'Content-Type': 'application/json',
