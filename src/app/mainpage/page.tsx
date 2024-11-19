@@ -7,14 +7,19 @@ import getCompanies from "@/libs/getCompanies";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
 import getBookings from "@/libs/getBookings";
+import Button from "@mui/material/Button";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"; // Import the icon
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
-  if (!session || !session.user.token) return(
-    <h1 className="text-4xl sm:text-5xl font-bold text-green-600 mb-4">
-        🌟 Please Login
+  if (!session || !session.user.token)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <h1 className="text-4xl sm:text-5xl font-bold text-green-600 mb-4">
+          🌟 Please Login
         </h1>
-  )       
+      </div>
+    );
   const profile = await getUserProfile(session.user.token);
   const role = profile.data.role;
   // sessionStorage.setItem('token',session.user.token)
@@ -46,8 +51,20 @@ export default async function Page() {
       {
         // may be move to topmenu
         role == "admin" ? (
-          <Link href={"/manage"}>
-            <button>Create</button>
+          <Link href="/manage">
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddCircleOutlineIcon />}
+              style={{
+                backgroundColor: "#4CAF50", // Custom green color
+                padding: "10px 20px",
+                fontSize: "16px",
+                textTransform: "none",
+              }}
+            >
+              Create
+            </Button>
           </Link>
         ) : null
       }
