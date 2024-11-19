@@ -7,7 +7,7 @@ import { getServerSession } from "next-auth"
 import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import Company from "@/db/Company"
-import { addCompany } from "@/components/CompanyAction"
+// import { addCompany } from "@/components/CompanyAction"
 
 export default async function AdminCreatePage(){
     const session= await getServerSession(authOptions)
@@ -19,7 +19,35 @@ export default async function AdminCreatePage(){
         redirect("/mainpage")
     }
 
+    const addCompany= async (addCompanyForm:FormData)=>{
+        "use server"
+        const name= addCompanyForm.get("name")
+        const business= addCompanyForm.get("business")
+        const building= addCompanyForm.get("building")
+        const tel= addCompanyForm.get("tel")
+        const province= addCompanyForm.get("province")
+        const pic= addCompanyForm.get("pic")
+        const postal= addCompanyForm.get("postal")
     
+        try{
+            await dbConnect() //to connect backend
+            const company=await Company.create(
+             {   "name":name,
+                "business":business,
+                "address":building,
+                "province":province,
+                "postalcode":postal,
+                "tel":tel,
+                "picture":pic
+            })
+            console.log("success")
+            
+        }catch(error){
+            console.log(error)
+        }
+        revalidateTag("companies")
+        redirect('/mainpage')
+    }
 
 
     return(
