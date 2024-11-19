@@ -18,8 +18,8 @@ export default function Banner() {
 
   const navigateToCompanies = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    router.push("/companies");
-    router.prefetch("/companies"); // Prefetching the route for smooth transition
+    router.push("/mainpage");
+    router.prefetch("/mainpage"); // Prefetching the route for smooth transition
   };
 
   return (

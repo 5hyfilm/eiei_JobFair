@@ -1,78 +1,85 @@
-'use client';
+'use client'
 import Link from "next/link";
 import styles from "../app/page.module.css";
-import BookingCard from "./BookingCard";
+import CompanyCard from "./CompanyCard";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import getBookings from "@/libs/getBookings";
 import deleteBooking from "@/libs/deleteBooking";
-
-type BookingItem = {
-    _id: string;
-    user: string;
-    bookingDate: string;
-    company: { id: string; name: string };
-};
+import BookingCard from "./BookingCard";
 
 type BookingResponse = {
+    [x: string]: any;
     data: BookingItem[];
 };
-
-export default function MyBookingCatalogue({ Profile_id, token }: { Profile_id: string; token: string }) {
+type CarResponse={
+    data: CompanyItem[];
+};
+export default function MyBookingCatalogue({Profile_id,token}:{Profile_id:string,token:string}){
     const [bookingResponse, setBookingResponse] = useState<BookingResponse | null>(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const booking = await getBookings(token);
-                setBookingResponse(booking);
-            } catch (error) {
-                console.error("Error fetching bookings:", error);
-            }
-        };
-        fetchData();
-    }, [token]);
-
-    async function removeBooking(Booking_ID: string) {
-        try {
-            await deleteBooking(token, Booking_ID);
-            setBookingResponse((prevState) =>
-                prevState
-                    ? {
-                          ...prevState,
-                          data: prevState.data.filter((bookingItem) => bookingItem._id !== Booking_ID),
-                      }
-                    : null
-            );
-        } catch (error) {
-            console.error("Error deleting booking:", error);
+    // const [companyResponse, setCompanyResponse] = useState<CarResponse| null> (null);
+    useEffect(()=>{
+        const fetchData=async()=>{
+            const booking = await getBookings(token)
+            setBookingResponse(booking.data)
         }
+        fetchData()
+
+    },[])  
+ 
+    async function removeBooking(Booking_ID: string) {
+        // console.log(Booking_ID);
+        await deleteBooking(token, Booking_ID);
+
+        // Update the state to remove the deleted booking
+        setBookingResponse((prevState) => ({
+            ...prevState,
+            data: prevState?.data.filter((bookingItem) => bookingItem._id !== Booking_ID) || []
+        }));
     }
-
-    if (!bookingResponse) return <>NOW LOADING...</>;
-
-    return (
+    if(bookingResponse==null) return <>NOW LOADING...</>
+    return(
+        //รูปภาพ รอแก้ไป get รูปภาพมา น่าจะต้อง useEffect อีกตัว ไม่งั้นคงใช้ custom hook
         <div>
-            <div className={styles.card_layout}>
-                {bookingResponse.data.map((bookingItem: BookingItem) => {
-                    const linkProps = {
-                        href: `/mainpage/${bookingItem.company.id}?reserve=${bookingItem.bookingDate}&booking=${bookingItem._id}`,
-                        className: "w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8",
-                        key: bookingItem._id,
-                    };
+<div className={styles.card_layout}>
+    {bookingResponse.map((bookingItem: BookingItem) => {
+        // Conditional rendering based on bookingItem.user
+        if (bookingItem.user === Profile_id) {
+            return (
+                <Link 
+                    href={`/mainpage/${bookingItem.company.id}?reserve=${bookingItem.bookingDate}&booking=${bookingItem._id}`} 
+                    className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8" 
+                    key={bookingItem._id}
+                >
+                    <BookingCard 
+                        companyName={bookingItem.company.name} 
+                        id={bookingItem._id} 
+                        reservationDate={bookingItem.bookingDate.slice(0, 10)} 
+                        onRemoveReservation={(id: string) => removeBooking(id)} 
+                        nowRole={Profile_id} 
+                    />
+                </Link>
+            );
+        }
 
-                    return (
-                        <Link {...linkProps}>
-                            <BookingCard
-                                companyName={bookingItem.company.name}
-                                id={bookingItem._id}
-                                reservationDate={bookingItem.bookingDate.slice(0, 10)}
-                                onRemoveReservation={removeBooking}
-                                nowRole={Profile_id}
-                            />
-                        </Link>
-                    );
-                })}
-            </div>
+        return (
+            <Link 
+                href={`/mainpage/${bookingItem.company.id}?reserve=${bookingItem.bookingDate}&booking=${bookingItem._id}`} 
+                className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8" 
+                key={bookingItem._id}
+            >
+                <BookingCard 
+                    companyName={bookingItem.company.name} 
+                    id={bookingItem._id} 
+                    reservationDate={bookingItem.bookingDate.slice(0, 10)} 
+                    onRemoveReservation={(id: string) => removeBooking(id)} 
+                />
+            </Link>
+        );
+    })}
+</div>
+
+             
         </div>
-    );
+    )
 }
