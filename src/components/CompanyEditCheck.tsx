@@ -30,6 +30,7 @@ export default function CompanyEditForm({ initialData, token, cid }:{initialData
         try {
             await editCompany(token, cid, formData);
             alert("Company details updated successfully!");
+            location.href='/mainpage'
         } catch (error) {
             console.error("Failed to update company:", error);
             alert("Error updating company details. Please try again.");
