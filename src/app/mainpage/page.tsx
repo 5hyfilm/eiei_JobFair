@@ -23,7 +23,7 @@ export default async function Page() {
   console.log("OK");
 
   const companies = await getCompanies();
-  const booking = await getBookings(session.user.token);
+  // const booking = await getBookings(session.user.token);
   return (
     <main className="text-center p-5 text-black">
       <h1 className="text-4xl sm:text-5xl font-bold text-green-600 mb-4">
