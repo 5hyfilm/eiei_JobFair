@@ -43,10 +43,10 @@ export const authOptions:AuthOptions={
             session.user=token as any
             return session
         },
-        // async redirect({ url, baseUrl }) {
-        //   // Set a default redirect if no callbackUrl is provided
-        //   return baseUrl;
-        // },
+        async redirect({ url, baseUrl }) {
+          // Set a default redirect if no callbackUrl is provided
+          return baseUrl;
+        },
     },
     pages: {
         signIn: "/signIn"
