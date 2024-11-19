@@ -28,15 +28,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session= await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextAuthProvider session={session}>
-        <TopMenu/>
-        {children}
+          <TopMenu />
+          {children}
+          <footer className="footer">
+            {/* Optional content inside the footer */}
+            
+          </footer>
         </NextAuthProvider>
       </body>
     </html>
