@@ -99,7 +99,7 @@ export default function CompanyDetailPage({params}:{params:{cid:string}}){
         
 
     }
-    if(!companyDetail || !session) return(<Suspense>Loading Company</Suspense>)
+    if(!companyDetail || !session) return(<Suspense><p className="text-center text-lg mt-20">Loading Company...</p></Suspense>)
         return (
             <main className="p-6 bg-gray-100 min-h-screen text-gray-800">
                 <div className="text-center mb-10">
