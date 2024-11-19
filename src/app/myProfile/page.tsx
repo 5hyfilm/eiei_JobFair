@@ -8,7 +8,11 @@ import { LinearProgress } from "@mui/material";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
-  if (!session || !session.user.token) return null;
+  if (!session || !session.user.token) return(
+    <h1 className="text-4xl sm:text-5xl font-bold text-green-600 mb-4">
+        🌟 Please Login
+        </h1>
+  )
 
   const profile = await getUserProfile(session.user.token);
 
